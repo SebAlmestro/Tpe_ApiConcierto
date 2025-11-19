@@ -1,31 +1,24 @@
 <?php
-
-require_once './libs/router/router.php';
-
-require_once './libs/jwt/jwt.middleware.php';
-
-require_once './app/controllers/user.apiController.php';
-require_once './app/controllers/banda.apiController.php';
-require_once './app/controllers/concierto.apiController.php';
+require_once "libs/router.php";
+require_once "controllers/apiBandaController.php";
+require_once "controllers/apiConciertoController.php";
 
 
-// instancio el router
 $router = new Router();
 
-//$router->addMiddleware(new JWTMiddleware());
+                        #endpoint       verbo              controller                     metodoController
+$router->addRoute('bandas'           , 'GET', 'apiBandaController', 'getBandas');
+// $router->addRoute('Canchas/sortedByPrecio', 'GET', 'ApicanchaController', 'getCanchaSortedByPrecio');
+// $router->addRoute('Canchas/:id_cancha', 'GET', 'ApicanchaController', 'getCanchaByID');
+// $router->addRoute('Canchas'           , 'POST','ApicanchaController', 'createCancha');
+// $router->addRoute('Canchas/:id_cancha', 'PUT', 'ApicanchaController', 'update');
 
-// defino los endpoints
-// $router->addRoute('auth/login',     'GET',     'AuthApiController',    'login');
+// $router->addRoute('Turnos'                  , 'GET','ApiTurnoController',  'getAllTurnos');
+// $router->addRoute('Turnos/:id_turno'        , 'GET','ApiTurnoController', 'getTurnoByID');
+// $router->addRoute('Turnos/cancha/:id_cancha', 'GET','ApiTurnoController', 'getTurnoByCancha');
+// $router->addRoute('Turnos'           , 'POST','ApiTurnoController', 'createTurno');
 
-$router->addRoute('bandas',         'GET',      'BandaController',    'getBandas');
-$router->addRoute('bandas/:id',     'GET',      'BandaController',    'getBanda');
-// $router->addRoute('tareas/:id',     'GET',      'TaskApiController',    'getTask');
 
-// $router->addMiddleware(new GuardMiddleware());
+$router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);
 
-// $router->addRoute('tareas/:id',     'DELETE',   'TaskApiController',    'deleteTask');
-// $router->addRoute('tareas',         'POST',     'TaskApiController',    'insertTask');
-// $router->addRoute('tareas/:id',     'PUT',      'TaskApiController',    'updateTask');
 
-// rutea
-$router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

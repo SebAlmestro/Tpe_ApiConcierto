@@ -1,23 +1,9 @@
 <?php
 
-require_once __DIR__ . '/request.php';
-require_once __DIR__ . '/response.php';
+require_once 'request.php';
+require_once 'response.php';
 
-// Parent class for Route and Middleware
-abstract class Routable {
-    abstract public function run($request, $response);
-}
-
-abstract class Middleware extends Routable {
-    public function match($url, $verb) {
-        // Middleware always matches
-        return true;
-    }
-
-    abstract public function run($request, $response);
-}
-
-class Route extends Routable {
+class Route {
     private $url;
     private $verb;
     private $controller;
@@ -44,11 +30,9 @@ class Route extends Routable {
             if($part[0] != ":"){
                 if($part != $partsURL[$key])
                 return false;
-            } 
-            else //es un parámetro
-            {
-                $this->params[''.substr($part,1)] = $partsURL[$key];
-            }
+            } //es un parametro
+            else
+            $this->params[''.substr($part,1)] = $partsURL[$key];
         }
         return true;
     }
@@ -63,6 +47,7 @@ class Route extends Routable {
 
 class Router {
     private $routeTable = [];
+    private $middlewares = [];
     private $defaultRoute;
     private $request;
     private $response;
@@ -74,11 +59,16 @@ class Router {
     }
 
     public function route($url, $verb) {
+        foreach ($this->middlewares as $middleware) {
+            $middleware->run($this->request, $this->response);
+        }
+        //$ruta->url //no compila!
         foreach ($this->routeTable as $route) {
-            if ($route->match($url, $verb)) {
+            if($route->match($url, $verb)){
+                //TODO: ejecutar el controller//ejecutar el controller
+                // pasarle los parametros
                 $route->run($this->request, $this->response);
-                if($this->response->hasFinished())
-                    return;
+                return;
             }
         }
         //Si ninguna ruta coincide con el pedido y se configuró ruta por defecto.
@@ -87,7 +77,7 @@ class Router {
     }
 
     public function addMiddleware($middleware) {
-        $this->routeTable[] = $middleware;
+        $this->middlewares[] = $middleware;
     }
     
     public function addRoute ($url, $verb, $controller, $method) {
