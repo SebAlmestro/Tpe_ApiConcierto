@@ -1,35 +1,42 @@
-<!-- public function deleteTask($req, $res) {
-        $idTask = $req->params->id;
-        $task = $this->model->get($idTask);
-    
-        if (!$task) {
-            return $res->json("La tarea con el id=$idTask no existe", 404);
-        }
-
-        $this->model->remove($idTask);
-
-        return $res->json("La tarea con el id=$idTask se eliminó", 204);
-    } -->
-    <?php
+<?php
 require_once './app/models/banda.model.php';
 
 class BandaController
 {
     private $model;
     
-
     function __construct()
     {
         $this->model = new BandaModel();
-        
     }
+
     function getBandas($req, $res)
     {
-        if(isset($req)){
-        // pido las tareas al modelo
+        // obtenemos todas las bandas
         $bandas = $this->model->getBandas();
+
+        // si no hay bandas
+        if (empty($bandas)) {
+            $res->json(['message' => 'No hay bandas cargadas'], 204);
+            exit;
         }
-        // respondo tareas con 200 OK
-        return $res->json("listado de bandas", 200);
+
+        // devolvemos el listado en formato JSON
+        $res->json($bandas, 200);
+        exit;
     }
+    public function getBanda($req, $res) {
+        // obtengo el ID que viene como parámetro del endpoint
+        $idBanda = $req->params->id;
+
+        $banda = $this->model->getBanda($idBanda);
+        
+        if (!$banda) {
+            return $res->json("La banda con el id=$idBanda no existe", 404);
+        }
+
+        return $res->json($banda);
+    }
+
 }
+    

@@ -1,4 +1,5 @@
 <?php
+
 require_once './libs/router/router.php';
 
 require_once './libs/jwt/jwt.middleware.php';
@@ -11,12 +12,13 @@ require_once './app/controllers/concierto.apiController.php';
 // instancio el router
 $router = new Router();
 
-$router->addMiddleware(new JWTMiddleware());
+//$router->addMiddleware(new JWTMiddleware());
 
 // defino los endpoints
 // $router->addRoute('auth/login',     'GET',     'AuthApiController',    'login');
 
 $router->addRoute('bandas',         'GET',      'BandaController',    'getBandas');
+$router->addRoute('bandas/:id',     'GET',      'BandaController',    'getBanda');
 // $router->addRoute('tareas/:id',     'GET',      'TaskApiController',    'getTask');
 
 // $router->addMiddleware(new GuardMiddleware());
