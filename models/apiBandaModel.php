@@ -23,6 +23,11 @@ class BandaModel
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
+    public function crearBanda($nombre, $pais, $genero, $imagen){
+        $query = $this->PDO->prepare("INSERT INTO banda (Nombre, Pais_origen, Genero, Imagen) VALUES (?,?,?,?)");
+        $query->execute([$nombre, $pais,  $genero,  $imagen]);
+        return $this->PDO->lastInsertId();
+    }
 
 
 }

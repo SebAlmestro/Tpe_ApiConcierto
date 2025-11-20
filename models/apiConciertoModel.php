@@ -21,6 +21,12 @@ class ConciertoModel{
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
+    public function crearConcierto($fecha, $horario, $lugar, $ciudad, $id_banda){
+        $query = $this->PDO->prepare("INSERT INTO concierto (Fecha, Horario, Lugar, Ciudad, id_banda) VALUES (?,?,?,?,?)");
+        $query->execute([$fecha, $horario, $lugar,  $ciudad, $id_banda]);
+        return $this->PDO->lastInsertId();
+
+    }
     
 
 }
