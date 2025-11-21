@@ -28,6 +28,11 @@ class BandaModel
         $query->execute([$nombre, $pais,  $genero,  $imagen]);
         return $this->PDO->lastInsertId();
     }
+    public function editarBanda($id, $nombre,  $pais, $genero, $imagen)
+    {
+        $query = $this->PDO->prepare("UPDATE banda SET Nombre=?,Pais_origen=?,Genero=?,Imagen=? WHERE  id_banda = ?");
+        $query->execute([$nombre, $pais,  $genero, $imagen, $id]);
+    }
 
 
 }

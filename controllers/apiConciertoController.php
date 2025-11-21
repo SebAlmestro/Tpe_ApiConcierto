@@ -50,15 +50,40 @@ class ConciertoController
             }
         }
     }
-    //Json para copiar en body raw en postman y chequear
-    // {
-    //     "fecha": "2025-12-10",
-    //     "horario": "21:00",
-    //     "lugar": "Luna Park",
-    //     "ciudad": "Buenos Aires",
-    //     "id_banda": 1
-    // }
+    //editar un concierto
+    public function editarConcierto($req, $res)
+    {
+        $id = $req->params->id_concierto;
 
+        $concierto = $this->model->getConcierto($id);
+        if (!$concierto) {
+            return $this->view->response("El concierto con el id=$id no existe", 404);
+        }
 
+        if (empty($req->body['fecha']) || empty($req->body['horario'])  || empty($req->body['lugar']) || empty($req->body['ciudad']) 
+        || empty($req->body['id_banda'])) {
+            return $this->view->response('Faltan completar datos', 400);
+        }
 
+        $fecha = $req->body['fecha'];
+        $horario = $req->body['horario'];
+        $lugar = $req->body['lugar'];
+        $ciudad = $req->body['ciudad'];
+        $id_banda = $req->body['id_banda'];
+
+        $this->model->editarConcierto($id, $fecha, $horario, $lugar, $ciudad, $id_banda);
+
+        $concierto = $this->model->getConcierto($id);
+
+        $this->view->response($concierto, 200);
+    }
+    
+    public function getConciertoSortedByDate(){
+        $conciertos = $this->model->getAllSortedByDate();
+        if(!empty($conciertos)){
+            $this->view->response($conciertos,200);
+        }else{
+            $this->view->response("Error al buscar los conciertos",404);
+        }
+    }
 }

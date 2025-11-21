@@ -8,15 +8,16 @@ $router = new Router();
 
                         #endpoint       verbo              controller                     metodoController
 $router->addRoute('bandas'           , 'GET', 'BandaController', 'getBandas');
-// $router->addRoute('Canchas/sortedByPrecio', 'GET', 'ApicanchaController', 'getCanchaSortedByPrecio');
 $router->addRoute('banda/:id_banda', 'GET', 'BandaController', 'getBanda');
 $router->addRoute('banda'           , 'POST','BandaController', 'crearBanda');
-// $router->addRoute('Canchas/:id_cancha', 'PUT', 'ApicanchaController', 'update');
+$router->addRoute('banda/:id_banda', 'PUT', 'BandaController', 'editarBanda');
 
 $router->addRoute('conciertos'                  , 'GET','ConciertoController',  'getConciertos');
 $router->addRoute('concierto/:id_concierto'        , 'GET','ConciertoController', 'getConcierto');
-// $router->addRoute('Turnos/cancha/:id_cancha', 'GET','ApiTurnoController', 'getTurnoByCancha');
+$router->addRoute('conciertos/sortedByDate', 'GET', 'ConciertoController', 'getConciertoSortedByDate');
 $router->addRoute('concierto'           , 'POST','ConciertoController', 'crearConcierto');
+$router->addRoute('concierto/:id_concierto', 'PUT', 'ConciertoController', 'editarConcierto');
+
 
 
 $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

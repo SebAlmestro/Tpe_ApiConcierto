@@ -12,7 +12,7 @@
                 $PDO = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname,$this->user,$this->password);
                 return $PDO; // La retornamos a quien haya llamado al metodo.
             } catch (PDOException $e) {
-                return $e->getMessage(); 
+                return $e->getMessage();
             }
         }
     }

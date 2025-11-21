@@ -37,10 +37,9 @@ class Route {
         return true;
     }
     public function run($request, $response){
-        $controller = $this->controller;  
+        $controller = $this->controller;
         $method = $this->method;
         $request->params = (object) $this->params;
-       
         (new $controller())->$method($request, $response);
     }
 }

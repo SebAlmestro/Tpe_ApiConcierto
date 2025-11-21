@@ -1,4 +1,4 @@
-<?php 
+<?php
 class ConciertoModel{
     private $PDO;
 
@@ -26,6 +26,17 @@ class ConciertoModel{
         $query->execute([$fecha, $horario, $lugar,  $ciudad, $id_banda]);
         return $this->PDO->lastInsertId();
 
+    }
+    public function editarConcierto($id, $fecha, $horario, $lugar, $ciudad, $id_banda)
+    {
+        $query = $this->PDO->prepare("UPDATE concierto SET fecha=?,horario=?,lugar=?,ciudad=?,id_banda=? WHERE  id_concierto = ?");
+        $query->execute([$fecha, $horario, $lugar, $ciudad, $id_banda, $id]);
+    }
+
+    public function getAllSortedByDate() {
+        $query = $this->PDO->prepare("SELECT * FROM concierto ORDER BY Fecha ASC, Horario ASC");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
     
 

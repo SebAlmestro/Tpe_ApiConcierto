@@ -47,12 +47,30 @@ class BandaController
             }
         }
     }
-    //ejemplo para insertar json raw en postman y chequear!
-    // {
-    //     "nombre": "Metallica",
-    //     "pais": "Estados Unidos",
-    //     "genero": "Heavy Metal",
-    //     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcuBwXj11CPsYF0hiknUIpLMr4FslKFgPOgA&s"
-    // }
+    
+    public function editarBanda($req, $res){
+        $id = $req -> params->id_banda;
+        
+        $banda = $this->model->getBanda($id);
+        if(!$banda){
+            return $this->view->response("La banda con el id=$id no existe", 404);
+        }
+
+        if (empty($req->body['nombre']) || empty($req->body['pais'])  || empty($req->body['genero']) || empty($req->body['imagen'])){
+            return $this->view->response('Faltan completar datos', 400);
+        }
+
+        $nombre = $req->body['nombre'];
+        $pais = $req->body['pais'];
+        $genero = $req->body['genero'];
+        $imagen = $req->body['imagen'];
+
+        $this->model-> editarBanda($id, $nombre, $pais, $genero, $imagen);
+        
+        $banda = $this->model->getBanda($id);
+
+        $this->view->response($banda, 200);
+    }
+    
     
 }
