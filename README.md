@@ -21,8 +21,8 @@ Contar con la base de datos importada en PhpMyAdmin para poder realizar las prue
 - POST:/api/banda
 - Se encarga de crear una nueva banda.
 - Este endpoint recibe un formData en el body del HTTP Request del siguiente formato:
-- Lo siguiente iría en el body-> en raw -> como Json.
-//
+//Json para copiar en body raw en postman y chequear
+
     {
         "nombre": "Metallica",
         "pais": "Estados Unidos",
@@ -33,7 +33,8 @@ Contar con la base de datos importada en PhpMyAdmin para poder realizar las prue
 PUT:/api/banda/:id
 - Se encarga de editar los campos de una banda ya creada.
 Este endpoint recibe la informacion con la siguiente estructura, con las mismas explicaciones del endpoint anterior de post banda.
-//
+//Json para copiar en body raw en postman y chequear
+
 {
         "nombre": "AC/DC",
         "pais": "Australia",
