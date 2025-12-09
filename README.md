@@ -85,5 +85,5 @@ PUT:/api/concierto/:id
 
 -Aclaracion de uso de endpoints desde Postman o similares: Si la carpeta donde se encuentra alojada la api esta dentro de 
 htdocs y otra carpeta llamada "entrega", un ejemplo de endpoint correcto para que el consumo de las funcionalidades de la API
-ocurra sin problemas es:
+ocurra sin problemas es.
 Metodo GET : http://localhost/entrega/api/conciertos/sortedByDate
