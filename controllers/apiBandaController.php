@@ -29,13 +29,14 @@ class BandaController
             $this->view->response("La banda con el id= $id  no se encuentra", 404);
         }
     }
+    //si un campo no se manda se asigna null y se evita el warnink undefined key
     public function crearBanda($req, $res){
         
         
-        $nombre = $req->body['nombre'];
-        $pais = $req->body['pais'];
-        $genero = $req->body['genero'];
-        $imagen = $req->body['imagen'];
+        $nombre = $req->body['nombre'] ?? null;
+        $pais = $req->body['pais'] ?? null;
+        $genero = $req->body['genero'] ?? null;
+        $imagen = $req->body['imagen'] ?? null;
         
 
         if (empty($nombre) || empty($pais) || empty($genero) || empty($imagen)){

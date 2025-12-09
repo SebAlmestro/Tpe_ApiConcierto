@@ -15,19 +15,19 @@ class ConciertoController
 
     //obtiene todos los conciertos y puede traerlos ordenados asc o desc
     public function getConciertos($req, $res)
-{
-    // tomar query params
-    $sort = $req->query->sort ?? null;      // ej: 'fecha'
-    $order = $req->query->order ?? 'asc';   // si no envía order, queda ascendente
+    {
+        // tomar query params
+        $sort = $req->query->sort ?? null;      // ej: 'fecha'
+        $order = $req->query->order ?? 'asc';   // si no envía order, queda ascendente
 
-    if($sort !== null){   // si se solicita ordenar
-        $conciertos = $this->model->getConciertosSorted($sort, $order);
-    } else {              // sin parámetros lista normal
-        $conciertos = $this->model->getConciertos();
+        if ($sort !== null) {   // si se solicita ordenar
+            $conciertos = $this->model->getConciertosSorted($sort, $order);
+        } else {              // sin parámetros lista normal
+            $conciertos = $this->model->getConciertos();
+        }
+
+        $this->view->response($conciertos, 200);
     }
-
-    $this->view->response($conciertos, 200);
-}
     //obtiene concierto por id
     public function getConcierto($req, $res)
     {
@@ -40,13 +40,14 @@ class ConciertoController
         }
     }
     //crear un concierto
+    //si un campo no se manda se asigna null y se evita el warnink undefined key
     public function crearConcierto($req, $res)
     {
-        $fecha = $req->body['fecha'];
-        $horario = $req->body['horario'];
-        $lugar = $req->body['lugar'];
-        $ciudad = $req->body['ciudad'];
-        $id_banda = $req->body['id_banda'];
+        $fecha   = $req->body['fecha']   ?? null;
+        $horario = $req->body['horario'] ?? null;
+        $lugar   = $req->body['lugar']   ?? null;
+        $ciudad  = $req->body['ciudad']  ?? null;
+        $id_banda = $req->body['id_banda'] ?? null;
 
         if (empty($fecha) || empty($horario) || empty($lugar) || empty($ciudad) || empty($id_banda)) {
             $this->view->response("Faltan datos para crear el concierto", 404);
@@ -69,8 +70,10 @@ class ConciertoController
             return $this->view->response("El concierto con el id=$id no existe", 404);
         }
 
-        if (empty($req->body['fecha']) || empty($req->body['horario'])  || empty($req->body['lugar']) || empty($req->body['ciudad']) 
-        || empty($req->body['id_banda'])) {
+        if (
+            empty($req->body['fecha']) || empty($req->body['horario'])  || empty($req->body['lugar']) || empty($req->body['ciudad'])
+            || empty($req->body['id_banda'])
+        ) {
             return $this->view->response('Faltan completar datos', 400);
         }
 
