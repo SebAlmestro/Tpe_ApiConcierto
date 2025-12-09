@@ -48,11 +48,17 @@ Este endpoint recibe la informacion con la siguiente estructura, con las mismas 
 GET:/api/conciertos
 - este endpoint devuelve todos los conciertos cargados en la base de datos
 
+- GET:/api/conciertos?sort=fecha
+- Este endpoint devuelve todos los conciertos ordenado de forma Ascendente dependiendo de la fecha.
+- Si quisieramos listarlo al reves podemos agregar a este endpoint &order=desc quedando asi de la siguiente forma
+ GET:/api/conciertos?sort=fecha&order=desc
+ este endpoint devuelve los conciertos ordenados de forma descendente por la fecha.
+
+
 - GET:/api/concierto/:id
 - este endpoint devuelve un concierto determinado por ID.
 
-- GET:/api/conciertos/sortedByDate
-- este endpoint devuelve todos los conciertos ordenado de forma Ascendente dependiendo de la fecha, si hubiera 2 conciertos el mismo dia, tambien se encarga de ordenarlos por horario.
+
 
 
 POST:/api/concierto

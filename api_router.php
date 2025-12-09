@@ -14,7 +14,6 @@ $router->addRoute('banda/:id_banda', 'PUT', 'BandaController', 'editarBanda');
 
 $router->addRoute('conciertos'                  , 'GET','ConciertoController',  'getConciertos');
 $router->addRoute('concierto/:id_concierto'        , 'GET','ConciertoController', 'getConcierto');
-$router->addRoute('conciertos/sortedByDate', 'GET', 'ConciertoController', 'getConciertoSortedByDate');
 $router->addRoute('concierto'           , 'POST','ConciertoController', 'crearConcierto');
 $router->addRoute('concierto/:id_concierto', 'PUT', 'ConciertoController', 'editarConcierto');
 

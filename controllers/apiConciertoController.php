@@ -13,12 +13,21 @@ class ConciertoController
         $this->view = new JSONView();
     }
 
-    //obtiene todos los conciertos
+    //obtiene todos los conciertos y puede traerlos ordenados asc o desc
     public function getConciertos($req, $res)
-    {
-        $conciertos =  $this->model->getConciertos();
-        $this->view->response($conciertos, 200);
+{
+    // tomar query params
+    $sort = $req->query->sort ?? null;      // ej: 'fecha'
+    $order = $req->query->order ?? 'asc';   // si no envía order, queda ascendente
+
+    if($sort !== null){   // si se solicita ordenar
+        $conciertos = $this->model->getConciertosSorted($sort, $order);
+    } else {              // sin parámetros lista normal
+        $conciertos = $this->model->getConciertos();
     }
+
+    $this->view->response($conciertos, 200);
+}
     //obtiene concierto por id
     public function getConcierto($req, $res)
     {
@@ -76,14 +85,5 @@ class ConciertoController
         $concierto = $this->model->getConcierto($id);
 
         $this->view->response($concierto, 200);
-    }
-    
-    public function getConciertoSortedByDate(){
-        $conciertos = $this->model->getAllSortedByDate();
-        if(!empty($conciertos)){
-            $this->view->response($conciertos,200);
-        }else{
-            $this->view->response("Error al buscar los conciertos",404);
-        }
     }
 }

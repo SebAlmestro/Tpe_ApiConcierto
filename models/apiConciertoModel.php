@@ -33,8 +33,8 @@ class ConciertoModel{
         $query->execute([$fecha, $horario, $lugar, $ciudad, $id_banda, $id]);
     }
 
-    public function getAllSortedByDate() {
-        $query = $this->PDO->prepare("SELECT * FROM concierto ORDER BY Fecha ASC, Horario ASC");
+    public function getConciertosSorted($sort, $order) {
+        $query = $this->PDO->prepare("SELECT * FROM concierto ORDER BY $sort $order");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
