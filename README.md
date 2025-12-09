@@ -12,13 +12,13 @@ Contar con la base de datos importada en PhpMyAdmin para poder realizar las prue
 ---
 ##Endpoints
 
-- GET:/api/banda
+- GET:/api/bandas
 - este endpoint devuelve todas las bandas cargadas en la base de datos.
 
-- GET:/api/banda/:id
+- GET:/api/bandas/:id
 - este endpoint devuelve una cancha especifica buscada por su id.
 
-- POST:/api/banda
+- POST:/api/bandas
 - Se encarga de crear una nueva banda.
 - Este endpoint recibe un formData en el body del HTTP Request del siguiente formato:
 
@@ -31,7 +31,7 @@ Contar con la base de datos importada en PhpMyAdmin para poder realizar las prue
         "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcuBwXj11CPsYF0hiknUIpLMr4FslKFgPOgA&s"
     }
 
-PUT:/api/banda/:id
+PUT:/api/bandas/:id
 - Se encarga de editar los campos de una banda ya creada.
 Este endpoint recibe la informacion con la siguiente estructura, con las mismas explicaciones del endpoint anterior de post banda.
 
@@ -45,23 +45,23 @@ Este endpoint recibe la informacion con la siguiente estructura, con las mismas 
     }
 
 
-GET:/api/concierto
+GET:/api/conciertos
 - este endpoint devuelve todos los conciertos cargados en la base de datos
 
-- GET:/api/concierto?sort=fecha
+- GET:/api/conciertos?sort=fecha
 - Este endpoint devuelve todos los conciertos ordenado de forma Ascendente dependiendo de la fecha.
 - Si quisieramos listarlo al reves podemos agregar a este endpoint &order=desc quedando asi de la siguiente forma
- GET:/api/concierto?sort=fecha&order=desc
+ GET:/api/conciertos?sort=fecha&order=desc
  este endpoint devuelve los conciertos ordenados de forma descendente por la fecha.
 
 
-- GET:/api/concierto/:id
+- GET:/api/conciertos/:id
 - este endpoint devuelve un concierto determinado por ID.
 
 
 
 
-POST:/api/concierto
+POST:/api/conciertos
 - Se encarga de crear un nuevo concierto.
 - Este endpoint recibe un formData en el body del HTTP Request del siguiente formato:
 
@@ -75,7 +75,7 @@ POST:/api/concierto
         "id_banda": 1
     }
 
-PUT:/api/concierto/:id
+PUT:/api/conciertos/:id
 - Se encarga de editar los campos de un concierto ya creado.
 - Este endpoint recibe un formData en el body del HTTP Request del siguiente formato:
 
@@ -92,4 +92,4 @@ PUT:/api/concierto/:id
 -Aclaracion de uso de endpoints desde Postman o similares: Si la carpeta donde se encuentra alojada la api esta dentro de 
 htdocs y otra carpeta llamada "entrega", un ejemplo de endpoint correcto para que el consumo de las funcionalidades de la API
 ocurra sin problemas es.
-Metodo GET : http://localhost/entrega/api/conciertos/sortedByDate
+Metodo GET : http://localhost/entrega/api/conciertos
