@@ -12,7 +12,7 @@ Contar con la base de datos importada en PhpMyAdmin para poder realizar las prue
 ---
 ##Endpoints
 
-- GET:/api/bandas
+- GET:/api/banda
 - este endpoint devuelve todas las bandas cargadas en la base de datos.
 
 - GET:/api/banda/:id
@@ -45,13 +45,13 @@ Este endpoint recibe la informacion con la siguiente estructura, con las mismas 
     }
 
 
-GET:/api/conciertos
+GET:/api/concierto
 - este endpoint devuelve todos los conciertos cargados en la base de datos
 
-- GET:/api/conciertos?sort=fecha
+- GET:/api/concierto?sort=fecha
 - Este endpoint devuelve todos los conciertos ordenado de forma Ascendente dependiendo de la fecha.
 - Si quisieramos listarlo al reves podemos agregar a este endpoint &order=desc quedando asi de la siguiente forma
- GET:/api/conciertos?sort=fecha&order=desc
+ GET:/api/concierto?sort=fecha&order=desc
  este endpoint devuelve los conciertos ordenados de forma descendente por la fecha.
 
 
